@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <head>
-<title>HSC </title>
+<title>Online Shop</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all"/>
@@ -47,11 +47,11 @@
  </div>
 <div class="menu">
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
-	  <li><a href="index.php">hiya</a></li>
-	  <li><a href="products.php">JEBA</a> </li>
-	  <li><a href="topbrands.php">CHAITY</a></li>
-	  <li><a href="cart.php">ARPITA</a></li>
-	  <li><a href="contact.php">Contact</a> </li>
+	  <li><a href="index.php">Roy</a></li>
+	  <li><a href="products.php">Roy</a> </li>
+	  <li><a href="topbrands.php">Roy</a></li>
+	  <li><a href="cart.php">Roy</a></li>
+	  <li><a href="contact.php">Roy</a> </li>
 	  <div class="clear"></div>
 	</ul>
 </div>
