@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD']== 'POST') {
 			</div>
 		</form><!-- form -->
 		<div class="button">
-			<a href="#">Training with live project</a>
+			<a href="#">Provashish Roy</a>
 		</div><!-- button -->
 	</section><!-- content -->
 </div><!-- container -->
