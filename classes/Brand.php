@@ -34,6 +34,51 @@ class Brand{
 			}
 		}
 	}
+	public function getAllBrand(){
+		$query = "SELECT * FROM tbl_brand ORDER BY brandId DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getBrandById($id){
+		$query = "SELECT * FROM tbl_brand WHERE brandId = '$id'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+
+	public function brandUpdate($brandName, $id){
+		$brandName = $this->fm->validation($brandName);
+		$brandName = mysqli_real_escape_string($this->db->link, $brandName);
+		$id = mysqli_real_escape_string($this->db->link, $id);
+
+		if (empty($brandName)) {
+			$msg = "<span class='error'>Brand feild Not empty.....</span>";
+			return $msg;
+		}else{
+			$query = "UPDATE  tbl_brand
+					SET 
+					brandName = '$brandName'
+					WHERE brandId='$id' ";
+			$updated_row = $this->db->update($query);
+			if ($updated_row) {
+				$msg = "<span class='success'>Brand update Successfully....</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='success'>Brand not update Successfully....</span>";
+				return $msg;
+			}
+		}
+	}
+	public function delbrandById($id){
+		$query = "DELETE FROM tbl_brand WHERE brandId = '$id'";
+		$deldata = $this->db->delete($query);
+		if ($deldata) {
+			$msg = "<span class='success'>Brand Deleted Successfully....</span>";
+				return $msg;
+		}else{
+			$msg = "<span class='success'>Brand Not Deleted Successfully....</span>";
+				return $msg;
+		}
+	}
 }
 
 ?>
