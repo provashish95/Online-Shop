@@ -3,11 +3,20 @@
 <?php include "../classes/Category.php";?>
 <?php
  $cat = new Category();
+ if (isset($_GET['delcat'])) {
+ 	$id  = $_GET['delcat'];
+ 	$delcat = $cat->delCatById($id);
+ }
 ?>
         <div class="grid_10">
             <div class="box round first grid">
                 <h2>Category List</h2>
-                <div class="block">        
+                <div class="block">  
+                <?php
+                if (isset($delcat)) {
+                	echo $delcat;
+                }
+                ?>      
                     <table class="data display datatable" id="example">
 					<thead>
 						<tr>
@@ -28,7 +37,7 @@
 							<td><?php echo $i; ?></td>
 							<td><?php echo $result['catName'];?></td>
 							<td><a href="catedit.php?catId=<?php echo $result['catId'];?>"
-								>Edit</a> || <a onclick="return confirm('Are you sure')" href="">Delete</a></td>
+								>Edit</a> || <a onclick="return confirm('Are you sure')" href="?delcat=<?php echo $result['catId'];?>">Delete</a></td>
 						</tr>
 					<?php } } ?>
 					
