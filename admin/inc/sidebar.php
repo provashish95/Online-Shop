@@ -29,6 +29,12 @@
                         <li><a href="catlist.php">Category List</a> </li>
                     </ul>
                 </li>
+                 <li><a class="menuitem">Brand Option</a>
+                    <ul class="submenu">
+                        <li><a href="BrandAdd.php">Brand Add</a> </li>
+                        <li><a href="Brandlist.php">Brand List</a> </li>
+                    </ul>
+                </li>
                 <li><a class="menuitem">Product Option</a>
                     <ul class="submenu">
                         <li><a href="productadd.php">Add Product</a> </li>
