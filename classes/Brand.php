@@ -18,7 +18,7 @@ class Brand{
 		$brandName = mysqli_real_escape_string($this->db->link, $brandName);
 
 		if (empty($brandName)) {
-			$msg = "<span class='error'>Category feild Not empty.....</span>";
+			$msg = "<span class='error'>Brand feild Not empty.....</span>";
 			return $msg;
 		}else{
 			$query = "INSERT INTO  tbl_brand (brandName)VALUES ('$brandName')";
