@@ -1,6 +1,7 @@
 <?php
-include_once "../lib/Database.php";
- include_once "../helpers/Format.php";
+$filepath = realpath(dirname(__FILE__));
+include_once ($filepath."/../lib/Database.php");
+include_once ($filepath."/../helpers/Format.php");
 
 class Product{
 	private $db;
@@ -138,6 +139,24 @@ class Product{
 			$msg = "<span class='success'>Product Not Deleted Successfully....</span>";
 				return $msg;
 		}
+	}
+	public function getFetureProduct(){
+		$query = "SELECT * FROM tbl_product WHERE type = '0' ORDER BY productId DESC LIMIT 4";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getNewProduct(){
+		$query = "SELECT * FROM tbl_product ORDER BY productId DESC LIMIT 4";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getSingleProduct($id){
+		$query = "SELECT p.*, c.catName, b.brandName
+					FROM tbl_product AS p, tbl_category AS c, tbl_brand AS b
+				WHERE p.catId = c.catId AND p.brandId = b.brandId AND productId='$id'";
+
+		$result = $this->db->select($query);
+		return $result;
 	}
 	
 }

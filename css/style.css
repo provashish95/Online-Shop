@@ -614,6 +614,7 @@ p.note{
 	position:relative; 
 }
 .images_1_of_4  img{
+	height: 200px;
 	max-width:100%;
 }
 .discount{
