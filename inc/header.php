@@ -12,6 +12,7 @@
  $pd = new Product();
  $ct = new Cart();
  $cat= new Category();
+ $cmr = new Customer();
 ?>
 
 <?php
@@ -75,7 +76,23 @@
 							</a>
 						</div>
 			      </div>
-		   <div class="login"><a href="login.php">Login</a></div>
+
+			      <?php 
+			      if (isset($_GET['cid'])) {
+			      	$delData = $ct->delCustomerCart();
+			      	Session::destroy();
+			      }
+			      ?>
+		   <div class="login">
+		   	<?php
+				$login = Session::get("custlog");
+				if ($login == false) {?>
+					<a href="login.php">Login</a>
+				<?php }else{?>
+					<a href="?cid=<?php Session::get('cmrId')?> ">Logout</a>
+			<?php }   ?>
+		   	
+		   </div>
 		 <div class="clear"></div>
 	 </div>
 	 <div class="clear"></div>
@@ -83,10 +100,22 @@
 <div class="menu">
 	<ul id="dc_mega-menu-orange" class="dc_mm-orange">
 	  <li><a href="index.php">Home</a></li>
-	  <li><a href="products.php">All Product</a> </li>
-	  <li><a href="topbrands.php">Brand</a></li>
-	  <li><a href="cart.php">Cart</a></li>
-	  <li><a href="contact.php">About</a> </li>
+	  <li><a href="products.php">Products</a> </li>
+	  <li><a href="topbrands.php">Top Brand</a></li>
+
+	  <?php
+	  $checkCart = $ct->checkCartTable();
+	  	if ($checkCart) {?>
+	  		<li><a href="cart.php">Cart</a></li>
+	  <?php	} ?>
+	  
+	  <?php 
+	  $login = Session::get("custlog");
+	  if ($login == true) {?>
+	  	<li><a href="Profile.php">Profile</a> </li>
+	  <?php }?>
+
+	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>
 </div>

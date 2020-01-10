@@ -30,7 +30,7 @@
 
 					 <p><span class="price"><?php echo $result['price']; ?></span></p>
 
-				     <div class="button"><span><a href="deteils.php?proid=<?php echo $result['productId'];?>" class="details">Details</a></span></div>>
+				     <div class="button"><span><a href="deteils.php?proid=<?php echo $result['productId'];?>" class="details">Details</a></span></div>
 				</div>
 			<?php } }else{
 				echo "<p>Product Of This Category Are Not Available !</p>";
