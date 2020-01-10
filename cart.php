@@ -16,6 +16,11 @@ if (isset($_GET['delpro'])) {
         }
          }
 ?>
+<?php 
+if (!isset($_GET['id'])) {
+	echo "<meta http-equiv='refresh' content ='0;URL=?id=live'>";
+}
+?>
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
@@ -46,6 +51,7 @@ if (isset($_GET['delpro'])) {
 							if ($getPro) {
 								$i = 0;
 								$sum = 0;
+								$quantity = 0;
 								while ($result = $getPro->fetch_assoc()) {
 									$i++;
 							
@@ -70,11 +76,18 @@ if (isset($_GET['delpro'])) {
 								 	?></td>
 								<td><a onclick="return confirm('Are you sure to delete');" href="?delpro=<?php echo $result['cartId'];?>">Delete</a></td>
 							</tr>
-							<?php 
+							<?php
+							$quantity = $quantity + $result['quantity']; 
 							$sum = $sum + $total;
+							Session::set("quantity", $quantity);
+							Session::set("sum", $sum);
 							?>
 							<?php } }?>							
 						</table>
+						<?php 
+							$getData = $ct->checkCartTable();
+							if ($getData){
+						?>
 						<table style="float:right;text-align:left;" width="40%">
 							<tr>
 								<th>Sub Total : </th>
@@ -94,6 +107,9 @@ if (isset($_GET['delpro'])) {
 								</td>
 							</tr>
 					   </table>
+					<?php }else{
+						echo "Cart Empty ! please shop now";
+					}?>
 					</div>
 					<div class="shopping">
 						<div class="shopleft">

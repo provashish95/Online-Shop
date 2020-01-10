@@ -62,8 +62,7 @@ class Cart{
 					WHERE cartId='$cartId' ";
 			$updated_row = $this->db->update($query);
 			if ($updated_row) {
-				$msg = "<span class='success'>Quantity update Successfully....</span>";
-				return $msg;
+				header('location:cart.php');
 			}else{
 				$msg = "<span class='error'>Quantity not update Successfully....</span>";
 				return $msg;
@@ -80,6 +79,12 @@ class Cart{
 			$msg = "<span class='success'>Product Not Deleted Successfully....</span>";
 				return $msg;
 		}
+	}
+	public function checkCartTable(){
+		$sId       = session_id();
+		$query     = "SELECT * FROM tbl_cart WHERE sId = '$sId'";
+		$result = $this->db->select($query);
+		return $result;
 	}
 }
 
