@@ -108,7 +108,8 @@ if (!isset($_GET['id'])) {
 							</tr>
 					   </table>
 					<?php }else{
-						echo "Cart Empty ! please shop now";
+						header('location:index.php');
+						//echo "Cart Empty ! please shop now";
 					}?>
 					</div>
 					<div class="shopping">
@@ -116,7 +117,7 @@ if (!isset($_GET['id'])) {
 							<a href="index.php"> <img src="images/shop.png" alt="" /></a>
 						</div>
 						<div class="shopright">
-							<a href="login.php"> <img src="images/check.png" alt="" /></a>
+							<a href="payment.php"> <img src="images/check.png" alt="" /></a>
 						</div>
 					</div>
     	</div>  	
