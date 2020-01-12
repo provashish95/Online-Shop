@@ -109,6 +109,12 @@
 	  		<li><a href="cart.php">Cart</a></li>
 	  		<li><a href="payment.php">Payment</a></li>
 	  <?php	} ?>
+	   <?php
+	   $cmrId = Session::get("cmrId");
+	  $checkOrder = $ct->checkOrderTable($cmrId);
+	  	if ($checkOrder) {?>
+	  		<li><a href="orderdeteils.php">Order</a></li>
+	  <?php	} ?>
 	  
 	  <?php 
 	  $login = Session::get("custlog");
