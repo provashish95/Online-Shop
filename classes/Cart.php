@@ -116,7 +116,7 @@ class Cart{
 		return $result;
 	}
 	public function getOrderProduct($cmrId){
-		$query= "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ORDER BY productId DESC";
+		$query= "SELECT * FROM tbl_order WHERE cmrId = '$cmrId' ORDER BY date DESC";
 		$result = $this->db->select($query);
 		return $result;
 	}
@@ -124,6 +124,63 @@ class Cart{
 		$query     = "SELECT * FROM tbl_order WHERE cmrId = '$cmrId'";
 		$result = $this->db->select($query);
 		return $result;
+	}
+
+	public function getAllOrderProduct(){
+		$query  = "SELECT * FROM tbl_order ORDER BY date DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function productShift($id, $date, $price){
+		$id = mysqli_real_escape_string($this->db->link, $id);
+		$date = mysqli_real_escape_string($this->db->link, $date);
+		$price = mysqli_real_escape_string($this->db->link, $price);
+
+		$query = "UPDATE  tbl_order
+					SET 
+						status = '1'
+					WHERE cmrId='$id' AND date='$date' AND price='$price' ";
+			$updated_row = $this->db->update($query);
+			if ($updated_row) {
+				$msg = "<span class='success'> update Successfully....</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='success'> not update Successfully....</span>";
+				return $msg;
+			}
+	}
+	public function delProductShift($id, $time, $price){
+		$id = mysqli_real_escape_string($this->db->link, $id);
+		$date = mysqli_real_escape_string($this->db->link, $time);
+		$price = mysqli_real_escape_string($this->db->link, $price);
+
+		$query = "DELETE FROM tbl_order WHERE cmrId='$id' AND date='$date' AND price='$price' ";
+		$deldata = $this->db->delete($query);
+		if ($deldata) {
+			$msg = "<span class='success'> Deleted Successfully....</span>";
+				return $msg;
+		}else{
+			$msg = "<span class='success'> Not Deleted Successfully....</span>";
+				return $msg;
+		}
+	}
+	public function productShiftConfirm($id, $time, $price){
+		$id = mysqli_real_escape_string($this->db->link, $id);
+		$date = mysqli_real_escape_string($this->db->link, $time);
+		$price = mysqli_real_escape_string($this->db->link, $price);
+
+		$query = "UPDATE  tbl_order
+					SET 
+						status = '2'
+					WHERE cmrId='$id' AND date='$date' AND price='$price' ";
+			$updated_row = $this->db->update($query);
+			if ($updated_row) {
+				$msg = "<span class='success'> update Successfully....</span>";
+				return $msg;
+			}else{
+				$msg = "<span class='success'> not update Successfully....</span>";
+				return $msg;
+			}
 	}
 	
 }

@@ -35,13 +35,18 @@
 						<input type="number" class="buyfield" name="quantity" value="1"/>
 						<input type="submit" class="buysubmit" name="submit" value="Buy Now"/>
 					</form>	
+				</div>
 					<span style="color: red; font-size: 18px;">
 						<?php 
 						if (isset($addCart)) {
 							echo $addCart;
 						}
 						?>
-					</span>			
+					</span>	
+					  <div class="add-cart">
+						<a class="buysubmit" href="">Save to list</a>
+						<a class="buysubmit" href="">Add to compare</a>
+				     </div>		
 				</div>
 			</div>
 			<div class="product-desc">
