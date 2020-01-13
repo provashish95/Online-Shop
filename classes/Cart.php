@@ -105,7 +105,7 @@ class Cart{
 		  	$price = $result['price']*$quantity;
 		  	$image = $result['image'];
 
-		  	$query ="INSERT INTO tbl_order (cmrId, productId, productName, quantity, price, image)VALUES('$cmrId','$productId','$productName','$quantity','$price','$uploaded_image')";
+		  	$query ="INSERT INTO tbl_order (cmrId, productId, productName, quantity, price, image)VALUES('$cmrId','$productId','$productName','$quantity','$price','$image')";
 	    	$inserted_row= $this->db->insert($query);
 		  }
 		}	

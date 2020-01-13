@@ -136,7 +136,7 @@ class Product{
 			$msg = "<span class='success'>Product Deleted Successfully....</span>";
 				return $msg;
 		}else{
-			$msg = "<span class='success'>Product Not Deleted Successfully....</span>";
+			$msg = "<span class='error'>Product Not Deleted Successfully....</span>";
 				return $msg;
 		}
 	}
@@ -184,6 +184,40 @@ class Product{
 		$query = "SELECT * FROM tbl_product WHERE catId = '$id'";
 		$result = $this->db->select($query);
 		return $result;
+	}
+	public function inserCompareData($cmpId, $cmrId){
+		$cmrId = mysqli_real_escape_string($this->db->link, $cmrId);
+		$productId = mysqli_real_escape_string($this->db->link, $cmpId);
+
+		$cquery= "SELECT * FROM tbl_compare WHERE cmrId = '$cmrId' AND productId ='$productId'";
+		$check = $this->db->select($cquery);
+		if ($check) {
+			$msg = "<span class='error'>Already Added to compare...</span>";
+				return $msg;
+		}
+
+		$query  = "SELECT * FROM tbl_product WHERE productId = '$productId'";
+		$result = $this->db->select($query)->fetch_assoc();
+
+		if ($result) {
+		  
+		  	$productId = $result['productId'];
+		  	$productName = $result['productName'];
+		  
+		  	$price = $result['price'];
+		  	$image = $result['image'];
+
+		  	$query ="INSERT INTO tbl_compare (cmrId, productId, productName, price, image)VALUES('$cmrId','$productId','$productName','$price','$image')";
+	    	$inserted_row= $this->db->insert($query);
+
+	    	if ($inserted_row) {
+	    		$msg = "<span class='success'>Added to compare....</span>";
+				return $msg;
+	    	}else{
+	    		$msg = "<span class='error'>Not Added to compare...</span>";
+				return $msg;
+	    	}
+		}
 	}
 	
 }

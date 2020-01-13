@@ -1,16 +1,22 @@
 <?php include "inc/header.php"; ?>
   <?php
-        if (!isset($_GET['proid']) || $_GET['proid']== NULL) {
-            echo "<script>window.location='index.php';</script>";
-        }else{
+        if (isset($_GET['proid'])){
+         
             $id = $_GET['proid'];
         }       
-        if ($_SERVER['REQUEST_METHOD']== 'POST') {
+        if ($_SERVER['REQUEST_METHOD']== 'POST' && isset($_POST['submit'])) {
             $quantity = $_POST['quantity'];
-
             $addCart = $ct->addToCart($quantity, $id);
             }       
         ?>
+
+ <?php
+      $cmrid = Session::get("cmrId");
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['compare'])) {
+		      	$productId = $_POST['productId'];
+		        $insertcom = $pd->inserCompareData($productId, $cmrid);             
+        }
+?>
  <div class="main">
     <div class="content">
     	<div class="section group">
@@ -42,11 +48,20 @@
 							echo $addCart;
 						}
 						?>
-					</span>	
-					  <div class="add-cart">
-						<a class="buysubmit" href="">Save to list</a>
-						<a class="buysubmit" href="">Add to compare</a>
-				     </div>		
+					</span>
+					<?php 
+						if (isset($insertcom)) {
+							echo $insertcom;
+						}
+						?>	
+					
+					<div class="add-cart">
+					   <form action="#" method="post">
+					   	<input type="hidden" class="buyfield" name="productId" value="<?php echo $result['productId'];?>"/>
+							<input type="submit" class="buysubmit" name="compare" value="Add to compare"/>
+						</form>	
+				     </div>
+					
 				</div>
 			</div>
 			<div class="product-desc">
