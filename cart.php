@@ -7,7 +7,7 @@ if (isset($_GET['delpro'])) {
 ?>
 
 <?php   
-    if ($_SERVER['REQUEST_METHOD']== 'POST') {
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $cartId = $_POST['cartId'];
         $quantity = $_POST['quantity'];
         $updateCart = $ct->updateCartQuantity($cartId, $quantity);

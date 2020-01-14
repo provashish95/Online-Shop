@@ -4,7 +4,7 @@
          
             $id = $_GET['proid'];
         }       
-        if ($_SERVER['REQUEST_METHOD']== 'POST' && isset($_POST['submit'])) {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
             $quantity = $_POST['quantity'];
             $addCart = $ct->addToCart($quantity, $id);
             }       
@@ -17,6 +17,16 @@
 		        $insertcom = $pd->inserCompareData($productId, $cmrid);             
         }
 ?>
+
+ <?php
+     $cmrid = Session::get("cmrId");
+      if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['wlist'])) {
+		        $insertSaveWlist = $pd->saveWlistData($id, $cmrid);             
+        }
+?>
+<style>
+	.mybutton{width: 100px; float: left; margin-right: 50px;}
+</style>
  <div class="main">
     <div class="content">
     	<div class="section group">
@@ -53,14 +63,28 @@
 						if (isset($insertcom)) {
 							echo $insertcom;
 						}
+						if (isset($insertSaveWlist)) {
+							echo $insertSaveWlist;
+						}
 						?>	
-					
+					<?php 
+					  $login = Session::get("custlog");
+	  					if ($login == true) {
+					?>
 					<div class="add-cart">
+					<div class="mybutton">
 					   <form action="#" method="post">
 					   	<input type="hidden" class="buyfield" name="productId" value="<?php echo $result['productId'];?>"/>
 							<input type="submit" class="buysubmit" name="compare" value="Add to compare"/>
 						</form>	
+					</div>
+					<div class="mybutton">
+						<form action="#" method="post">
+							<input type="submit" class="buysubmit" name="wlist" value="Save to List"/>
+						</form>
+					</div>
 				     </div>
+				 <?php }?>
 					
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 <?php include "inc/header.php"; ?>
+
  <?php
         if (!isset($_GET['catId']) || $_GET['catId']== NULL) {
             echo "<script>window.location='index.php';</script>";

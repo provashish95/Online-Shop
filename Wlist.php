@@ -1,19 +1,15 @@
 <?php include "inc/header.php"; ?>
 <?php
-$login = Session::get("custlog");
-if ($login == false) {
-	header("location: login.php");
+if (isset($_GET['delwlistid'])) {
+	$productId = $_GET['delwlistid'];
+	$delWlist = $pd->delWlistData($cmrId, $productId);
 }
 ?>
-<style>
-	table.tblone img{height: 90px; width: 100px;}
-</style>
-
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
 			<div class="cartpage">
-			    	<h2>Compare</h2>
+			    	<h2>Your List</h2>
 			    	
 						<table class="tblone">
 							<tr>
@@ -24,8 +20,8 @@ if ($login == false) {
 								<th >Action</th>
 							</tr>
 							<?php
-							$cmrId = Session::get("cmrId");
-							$getPd = $pd->getCompareData($cmrId);
+							
+							$getPd = $pd->chekcwlist($cmrId);
 							if ($getPd) {
 								$i = 0;
 								
@@ -37,7 +33,10 @@ if ($login == false) {
 								<td><?php echo $result['productName'];?></td>
 								<td>tk <?php echo $result['price'];?></td>
 								<td><img src="admin/<?php echo $result['image'];?>" alt=""/></td>
-								<td><a href="deteils.php?proid=<?php echo $result['productId']; ?>">View</a></td>							 
+								<td>
+									<a href="deteils.php?proid=<?php echo $result['productId']; ?>">Buy now</a> || 
+									<a href="?delwlistid=<?php echo $result['productId']; ?>">Remove</a>
+								</td>							 
 							</tr>
 							
 							<?php } }?>							

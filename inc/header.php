@@ -79,7 +79,9 @@
 
 			      <?php 
 			      if (isset($_GET['cid'])) {
+			      	$cmrId = Session::get("cmrId");
 			      	$delData = $ct->delCustomerCart();
+			      	$delComp = $pd->delCompareData($cmrId);
 			      	Session::destroy();
 			      }
 			      ?>
@@ -120,7 +122,19 @@
 	  if ($login == true) {?>
 	  	<li><a href="Profile.php">Profile</a> </li>
 	  <?php }?>
+	  	<?php
+			$cmrId = Session::get("cmrId");
+			$getPd = $pd->getCompareData($cmrId);
+			if ($getPd) {					
+		?>
 	  <li><a href="compare.php">Compare</a></li>
+	<?php }?>
+		<?php
+			$chekcwlist = $pd->chekcwlist($cmrId);
+			if ($chekcwlist) {					
+		?>
+	  <li><a href="Wlist.php">Wishlist</a></li>
+	<?php }?>
 	  <li><a href="contact.php">Contact</a> </li>
 	  <div class="clear"></div>
 	</ul>

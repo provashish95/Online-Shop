@@ -158,27 +158,31 @@ class Product{
 		$result = $this->db->select($query);
 		return $result;
 	}
-
+//LATEST PRODUCT HERE WILL BE SHOW BY BARND ID........
+//LATEST PRODUCT HERE WILL BE SHOW BY BARND ID........
 	public function latestFromIphone(){
-		$query = "SELECT * FROM tbl_product WHERE brandId = '11' ORDER BY productId DESC LIMIT 1";
+		$query = "SELECT * FROM tbl_product WHERE brandId = '15' ORDER BY productId DESC LIMIT 1";
 		$result = $this->db->select($query);
 		return $result;
 	}
 	public function latestFromAcer(){
-		$query = "SELECT * FROM tbl_product WHERE brandId = '12' ORDER BY productId DESC LIMIT 1";
+		$query = "SELECT * FROM tbl_product WHERE brandId = '16' ORDER BY productId DESC LIMIT 1";
 		$result = $this->db->select($query);
 		return $result;
 	}
 	public function latestFromSamsung(){
-		$query = "SELECT * FROM tbl_product WHERE brandId = '13' ORDER BY productId DESC LIMIT 1";
+		$query = "SELECT * FROM tbl_product WHERE brandId = '17' ORDER BY productId DESC LIMIT 1";
 		$result = $this->db->select($query);
 		return $result;
 	}
 	public function latestFromCanon(){
-		$query = "SELECT * FROM tbl_product WHERE brandId = '14' ORDER BY productId DESC LIMIT 1";
+		$query = "SELECT * FROM tbl_product WHERE brandId = '18' ORDER BY productId DESC LIMIT 1";
 		$result = $this->db->select($query);
 		return $result;
 	}
+//LATEST PRODUCT HERE WILL BE SHOW BY BARND ID........
+//LATEST PRODUCT HERE WILL BE SHOW BY BARND ID........
+
 	public function productByCat($id){
 		$catid = mysqli_real_escape_string($this->db->link, $id);
 		$query = "SELECT * FROM tbl_product WHERE catId = '$id'";
@@ -211,7 +215,7 @@ class Product{
 	    	$inserted_row= $this->db->insert($query);
 
 	    	if ($inserted_row) {
-	    		$msg = "<span class='success'>Added to compare....</span>";
+	    		$msg = "<span class='success'>Added & Check compare Page....</span>";
 				return $msg;
 	    	}else{
 	    		$msg = "<span class='error'>Not Added to compare...</span>";
@@ -219,7 +223,54 @@ class Product{
 	    	}
 		}
 	}
-	
-}
+	public function getCompareData($cmrId){
+		$query = "SELECT * FROM tbl_compare WHERE cmrId = '$cmrId' ORDER BY id DESC";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function delCompareData($cmrId){
+		$query = "DELETE FROM tbl_compare WHERE cmrId = '$cmrId'";
+		$deldata = $this->db->delete($query);
+	}
+	public function saveWlistData($id, $cmrId){
+		$cmrId = mysqli_real_escape_string($this->db->link, $cmrId);
+		$id = mysqli_real_escape_string($this->db->link, $id);
+		$cquery= "SELECT * FROM tbl_wlist WHERE cmrId = '$cmrId' AND productId ='$id'";
+		$check = $this->db->select($cquery);
+		if ($check) {
+			$msg = "<span class='error'>Already Added to Wlist...</span>";
+				return $msg;
+		}
+		$pquery     = "SELECT * FROM tbl_product WHERE productId = '$id'";
+		$result = $this->db->select($pquery)->fetch_assoc();
+
+		if ($result) {
+		  	$productId = $result['productId'];
+		  	$productName = $result['productName'];
+		  	$price = $result['price'];
+		  	$image = $result['image'];
+
+		  	$query ="INSERT INTO tbl_wlist (cmrId, productId, productName, price, image)VALUES('$cmrId','$productId','$productName','$price','$image')";
+	    	$inserted_row= $this->db->insert($query);
+	    	if ($inserted_row) {
+	    		$msg = "<span class='success'>Check Wlist page...</span>";
+				return $msg;
+	    	}else{
+	    		$msg = "<span class='error'>Not Added to Wlist...</span>";
+				return $msg;
+	    	}
+		  }
+		}
+
+		public function chekcwlist($cmrId){
+			  $query = "SELECT * FROM tbl_wlist WHERE cmrId = '$cmrId' ORDER BY id DESC";
+				$result = $this->db->select($query);
+				return $result;
+		}
+		public function delWlistData($cmrId, $productId){
+			$query = "DELETE FROM tbl_wlist WHERE cmrId = '$cmrId' AND productId = '$productId'";
+			$deldata = $this->db->delete($query);
+		}
+   }
 
 ?>
